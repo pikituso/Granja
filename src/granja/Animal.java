@@ -59,6 +59,47 @@ public class Animal {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Animal{codigo=" + this.codigo +
+                ", fechaNacimiento=Fecha{" + this.getFechaNacimiento().getDiaDeLaSemana() + ", " + this.getFechaNacimiento().getDia() + " de " + this.getFechaNacimiento().getMesNombre() + " de " + this.getFechaNacimiento().getAnyo() +
+                "}, sexo=" + this.getSexo() + ", peso=" + this.getPeso() + "}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Animal other = (Animal) obj;
+        if (!this.codigo.equals(other.codigo)) {
+            return false;
+        }
+        if (!this.fechaNacimiento.equals(other.fechaNacimiento)) {
+            return false;
+        }
+        if (this.peso != other.peso) {
+            return false;
+        }
+        if (this.sexo != other.sexo) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    
+    
+
     public Animal(String codigo, String fechaNacimiento, char sexo, double peso) throws IllegalArgumentException {
         Fecha fecha;
 
@@ -74,3 +115,4 @@ public class Animal {
     }
 
 }
+
