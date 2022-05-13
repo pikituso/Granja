@@ -1,4 +1,4 @@
-package granja;
+package animales;
 
 import animales.Fecha;
 
