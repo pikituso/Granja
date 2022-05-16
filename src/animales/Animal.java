@@ -1,13 +1,11 @@
 package animales;
 
-import animales.Fecha;
-
 /**
  *
  * @author Pikiportatil
  */
-public class Animal {
-
+public abstract class Animal {
+    
     protected String codigo;
     private Fecha fechaNacimiento;
     private char sexo;
@@ -113,6 +111,12 @@ public class Animal {
             this.sexo = sexo;
         }
     }
+    
+    public abstract String hacerSonido();
 
+    public abstract String alegrarse();
+    
+    public abstract String enfadarse();
+    
+    public abstract String queSoy();
 }
-
