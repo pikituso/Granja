@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Granja {
 
-    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int nAnimales;
@@ -13,13 +12,15 @@ public class Granja {
         char sexo;
         double peso;
         String fechaNacimiento;
-        Perro perro = null;
+        Perro perro;
         String raza;
-        
+        int perroV = 0;
+        Perro perroAnterior = null;
+
         nAnimales = sc.nextInt();
         sc.nextLine();
-        System.out.println("Procesando animales de la granja\n----------------------------------");
-        
+        System.out.println("Procesando perros de la granja\n----------------------------------");
+
         for (int i = 0; i < nAnimales; i++) {
             codigo = sc.nextLine();
             fechaNacimiento = sc.nextLine();
@@ -27,81 +28,23 @@ public class Granja {
             peso = sc.nextDouble();
             sc.nextLine();
             raza = sc.nextLine();
-            
+
             try {
                 perro = new Perro(codigo, fechaNacimiento, sexo, peso, raza);
-                System.out.println("Procesado: " + perro.getCodigo()
-                        + " " + perro.getRaza()
-                        + " " + perro.getSexo()
-                        + " de " + perro.getPeso()
-                + " kilos, nacido el " + perro.getFechaNacimiento().getDia()
-                        + " de " + perro.getFechaNacimiento().getMesNombre()
-                        + " de " + perro.getFechaNacimiento().getAnyo());
-                System.out.println(perro.queSoy());
-                System.out.println(perro.pasear());
-                System.out.println("Cuando estoy alegre " + perro.alegrarse());
-                System.out.println("Cuando me enfado " + perro.enfadarse());
+                if (perroV > 0) {
+                    if (perro.equals(perroAnterior)) {
+                        System.out.println(perro.toString() + " y " + perroAnterior.toString() + " son el mismo");
+                    } else {
+                        System.out.println(perro.toString() + " y " + perroAnterior.toString() + " son distintos");
+                    }
+                }
+                perroV++;
+                perroAnterior = new Perro(codigo, fechaNacimiento, sexo, peso, raza);
             } catch (IllegalArgumentException ex) {
-                System.out.println("ERROR. Procesando siguiente animal");
+                System.out.println("ERROR. Procesando siguiente perro");
             }
+            
         }
-        
-        System.out.println("Cambiando datos del ultimo animal\n----------------------------------");
-            
-            boolean esCorrecto = false;
-            while (!esCorrecto) {
-                codigo = sc.nextLine();
-                try {
-                    perro.setCodigo(codigo);
-                    esCorrecto = true;
-                } catch (IllegalArgumentException ex) {
-                    System.out.println("Dato erroneo. No se hace el cambio");
-                }
-            }
-            
-            perro.setRaza(perro.getRaza());
-            
-            
-            esCorrecto = false;
-            while (!esCorrecto) {
-                fechaNacimiento = sc.nextLine();
-                try {
-                    perro.setFechaNacimiento(fechaNacimiento);
-                    esCorrecto = true;
-                } catch (IllegalArgumentException ex) {
-                    System.out.println("Dato erroneo. No se hace el cambio");
-                }
-            }
-            
-            esCorrecto = false;
-            while (!esCorrecto) {
-                sexo = sc.nextLine().charAt(0);
-                try {
-                    perro.setSexo(sexo);
-                    esCorrecto = true;
-                } catch (IllegalArgumentException ex) {
-                    System.out.println("Dato erroneo. No se hace el cambio");
-                }
-            }
-            
-            esCorrecto = false;
-            while (!esCorrecto) {
-                peso = sc.nextDouble();
-                try {
-                    perro.setPeso(peso);
-                    esCorrecto = true;
-                } catch (IllegalArgumentException ex) {
-                    System.out.println("Dato erroneo. No se hace el cambio");
-                }
-            }
-            
-            
-            System.out.println("Procesado: " + perro.getCodigo()
-                        + " " + perro.getRaza()
-                        + " " + perro.getSexo()
-                        + " de " + perro.getPeso()
-                + " kilos, nacido el " + perro.getFechaNacimiento().getDia()
-                        + " de " + perro.getFechaNacimiento().getMesNombre()
-                        + " de " + perro.getFechaNacimiento().getAnyo());
+
     }
 }

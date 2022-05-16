@@ -1,5 +1,7 @@
 package animales;
 
+import java.util.Objects;
+
 public class Perro extends Animal {
 
     private String raza;
@@ -63,4 +65,34 @@ public class Perro extends Animal {
             this.raza = raza;
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Perro other = (Perro) obj;
+        return Objects.equals(this.raza, other.raza) && super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{codigo=" + this.codigo +
+                ", fechaNacimiento=Fecha{" + this.getFechaNacimiento().getDiaDeLaSemana() + ", " + this.getFechaNacimiento().getDia() + " de " + this.getFechaNacimiento().getMesNombre() + " de " + this.getFechaNacimiento().getAnyo() +
+                "}, sexo=" + this.getSexo() + ", peso=" + this.getPeso() + "}"
+                + "raza=" + this.getRaza() + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); 
+    }
+    
+    
 }
